@@ -1,0 +1,45 @@
+Design a Spring Boot Rest Service (GET) Which will create a unique token based on email+userid+user access level+timestamp.  Also create a exchange service which will give the data back.
+
+{HOST}/tokenService/requestToken/{userid}
+{HOST}/tokenService/exchangeToken/{token}
+
+
+Inputs:
+Database: Have a simple database for id, name, email, access level, Status (active/inactive) (should be in number)
+Unique Token: use encrypt / decrypt algorithms ex. AES
+
+Expected Solution:
+1.	Keep config to support multiple environments like Dev/Stage/ Prod
+2.	should have basic validation of the valid user id based on active/inactive
+3.	every time it should give a unique token
+4.	given toke should be decryptable giving back the same data email, userid, user access level
+5.	Write jUnits to keep 80% coverage
+
+--------------------------
+
+We'll create a Spring Boot application with two endpoints:
+
+Request Token (/tokenService/requestToken/{userid})
+
+Validates the user from the database (must be active).
+
+Generates a unique token using AES encryption.
+
+Exchange Token (/tokenService/exchangeToken/{token})
+
+Decrypts the token and returns the original user details.
+
+Tech Stack:
+------------
+->Spring Boot
+->Spring Data JPA (MySQL)
+->AES Encryption/Decryption
+->Spring Profiles for Environment Configurations
+->JUnit 5 & Mockito for Testing
+
+-----
+Endpoints:
+
+/tokenService/requestToken/{userid} → Generates a unique encrypted token
+
+/tokenService/exchangeToken/{token} → Decrypts the token and returns user details
